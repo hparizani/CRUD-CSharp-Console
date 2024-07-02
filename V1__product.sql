@@ -23,11 +23,3 @@ GO
 
 SET ANSI_PADDING OFF
 GO
-
-INSERT INTO Product (name, quantity, description, price) VALUES ('Laranja', 2500, 'Fruta', 7.50);
-
-SELECT * FROM Product WHERE id = 2;
-
-ALTER TABLE Product DROP COLUMN price;
-
-ALTER TABLE Product ADD price DECIMAL(10, 2);
