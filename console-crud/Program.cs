@@ -9,7 +9,6 @@ namespace console_crud
         {
             Product product = new Product();
             Util util = new Util();
-            List<Product> products = product.GetProducts();
             int option = 0;
 
             do
@@ -53,6 +52,7 @@ namespace console_crud
                     case 2: // Select Products
                         try
                         {
+                            List<Product> products = product.GetProducts(); // Recarrega a lista de produtos
                             foreach (Product selectedProduct in products)
                             {
                                 Console.WriteLine($"ID: {selectedProduct.id} Nome: {selectedProduct.name} Quantidade: {selectedProduct.quantity} Descrição: {selectedProduct.description} Preço: {selectedProduct.price}");
@@ -65,12 +65,12 @@ namespace console_crud
                         break;
 
                     case 3: // Update Product
-                        Console.WriteLine("Produtos cadastrados: ");
                         try
                         {
+                            List<Product> products = product.GetProducts(); // Recarrega a lista de produtos
                             foreach (Product updateProduct in products)
                             {
-                                Console.WriteLine($"ID: {updateProduct.id} Nome: {updateProduct.name}  Quantidade:  {updateProduct.quantity} Descrição: {updateProduct.description} Preço: {updateProduct.price}");
+                                Console.WriteLine($"ID: {updateProduct.id} Nome: {updateProduct.name} Quantidade: {updateProduct.quantity} Descrição: {updateProduct.description} Preço: {updateProduct.price}");
                             }
                         }
                         catch (Exception ex)
@@ -102,6 +102,7 @@ namespace console_crud
                         Console.WriteLine("Produtos cadastrados: ");
                         try
                         {
+                            List<Product> products = product.GetProducts(); // Recarrega a lista de produtos
                             foreach (Product selectedProduct in products)
                             {
                                 Console.WriteLine($"ID: {selectedProduct.id} Nome: {selectedProduct.name}  Quantidade:  {selectedProduct.quantity} Descrição: {selectedProduct.description} Preço: {selectedProduct.price}");
@@ -145,4 +146,5 @@ namespace console_crud
         }
     }
 }
+
 
