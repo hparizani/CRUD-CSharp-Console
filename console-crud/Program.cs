@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace console_crud
 {
@@ -7,60 +8,141 @@ namespace console_crud
         static void Main(string[] args)
         {
             Product product = new Product();
+            Util util = new Util();
+            List<Product> products = product.GetProducts();
             int option = 0;
+
             do
             {
-                option = 0;
-                Console.WriteLine("Bem-vindo ao sistema de gerenciamento de produtos, escolha uma opção(1 a 4): ");
-                Console.WriteLine("1 - Cadastrar");
-                Console.WriteLine("2 - Visualizar produtos cadastrados");
-                Console.WriteLine("3 - Atualizar produtos");
-                Console.WriteLine("4 - Deletar produto");
-                option = Convert.ToInt16(Console.ReadLine());
-                if (option < 1|| option > 4)
+                util.showMainMenu(ref option);
+
+                if (option < 1 || option > 5)
                 {
-                    Console.WriteLine("Opção inválida, digite um valor númerico (1 a 4).");
+                    Console.WriteLine("Opção inválida, digite um valor númerico (1 a 5).");
+                    Console.WriteLine("Pressione 'Enter' para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
                 }
-            }while(option < 1 || option > 4);
-            
-            Console.Clear();
 
-            if (option == 1)
-            {
-                try
+                Console.Clear();
+
+                switch (option)
                 {
-                    registrer(product);
-                    bool returnRegirstrerProduct = product.registrerProduct(product);
+                    case 1: // Register Product
+                        try
+                        {
+                            util.showRegistrerMenu(product);
+                            bool returnRegisterProduct = product.registrerProduct(product);
 
-                    if (returnRegirstrerProduct)
-                    {
-                        Console.WriteLine(String.Format("Cadastro do produto {0} realizado com sucesso.", product.name));
-                        Console.ReadKey();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Falha ao cadastrar produto");
-                        Console.ReadKey();
-                    }
+                            if (returnRegisterProduct)
+                            {
+                                Console.WriteLine(String.Format("Cadastro do produto {0} realizado com sucesso.", product.name));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Falha ao cadastrar produto");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao executar cadastro do produto {0}. Erro: {1}", product.name, ex.Message));
+                        }
+                        break;
+
+                    case 2: // Select Products
+                        try
+                        {
+                            foreach (Product selectedProduct in products)
+                            {
+                                Console.WriteLine($"ID: {selectedProduct.id} Nome: {selectedProduct.name} Quantidade: {selectedProduct.quantity} Descrição: {selectedProduct.description} Preço: {selectedProduct.price}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao selecionar produtos. Erro: {0}", ex.Message));
+                        }
+                        break;
+
+                    case 3: // Update Product
+                        Console.WriteLine("Produtos cadastrados: ");
+                        try
+                        {
+                            foreach (Product updateProduct in products)
+                            {
+                                Console.WriteLine($"ID: {updateProduct.id} Nome: {updateProduct.name}  Quantidade:  {updateProduct.quantity} Descrição: {updateProduct.description} Preço: {updateProduct.price}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao selecionar produtos. Erro: {0}", ex.Message));
+                        }
+
+                        try
+                        {
+                            util.showUpdateMenu(product);
+                            bool returnUpdateProduct = product.updateProduct(product);
+
+                            if (returnUpdateProduct)
+                            {
+                                Console.WriteLine(String.Format("Alteração do produto {0} realizada com sucesso.", product.name));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Falha ao alterar produto");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao alterar produto. Erro: {0}", ex.Message));
+                        }
+                        break;
+
+                    case 4: // Delete Product
+                        Console.WriteLine("Produtos cadastrados: ");
+                        try
+                        {
+                            foreach (Product selectedProduct in products)
+                            {
+                                Console.WriteLine($"ID: {selectedProduct.id} Nome: {selectedProduct.name}  Quantidade:  {selectedProduct.quantity} Descrição: {selectedProduct.description} Preço: {selectedProduct.price}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao selecionar produtos. Erro: {0}", ex.Message));
+                        }
+
+                        try
+                        {
+                            util.showDeleteMenu(product);
+                            bool returnDeleteProduct = product.deleteProduct(product);
+
+                            if (returnDeleteProduct)
+                            {
+                                Console.WriteLine(String.Format("Produto {0} deletado com sucesso.", product.id));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Falha ao deletar o produto");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(String.Format("Erro ao deletar produto. Erro {0}", ex.Message));
+                        }
+                        break;
+
+                    case 5: // Exit
+                        Console.WriteLine("Saindo do programa...");
+                        return; // Sai do método Main, encerrando o programa
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(String.Format("Erro ao executar cadastro do produto {0}. Erro: {1}", product.name, ex.Message));
-                }
-            }
 
-        }
+                Console.WriteLine("Pressione 'Enter' para continuar...");
+                Console.ReadKey();
+                Console.Clear();
 
-        static void registrer(Product product)
-        {
-            Console.WriteLine("Informe o nome do produto: ");
-            product.name = Console.ReadLine();
-            Console.WriteLine("Informe a quantidade do produto: ");
-            product.quantity = Convert.ToInt16(Console.ReadLine());
-            Console.WriteLine("Informe a descrição do produto: ");
-            product.description = Console.ReadLine();
-            Console.WriteLine("Informe o preço do produto: ");
-            product.price = Convert.ToDecimal(Console.ReadLine());
+            } while (option != 5);
         }
     }
 }
+
