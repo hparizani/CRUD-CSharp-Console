@@ -135,7 +135,7 @@ namespace console_crud
 
                     case 5: // Exit
                         Console.WriteLine("Saindo do programa...");
-                        return; // Sai do método Main, encerrando o programa
+                        return;
                 }
 
                 Console.WriteLine("Pressione 'Enter' para continuar...");

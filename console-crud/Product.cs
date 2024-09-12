@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace console_crud
@@ -11,13 +12,15 @@ namespace console_crud
         public string description { get; set; }
         public decimal price { get; set; }
         public int id { get; set; }
+        private string connectionStrings { get; set; }
+
         // CREATE
         public bool registrerProduct(Product product)
         {
             try
             {
-                string connectionString = @"Data Source=HPARIZANI;Initial Catalog=PIM;Integrated Security=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
 
@@ -52,9 +55,9 @@ namespace console_crud
             List<Product> products = new List<Product>();
             try
             {
-                string connectionString = @"Data Source=HPARIZANI;Initial Catalog=PIM;Integrated Security=True";
+                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     SqlCommand selectCommand = new SqlCommand("SELECT * FROM Product", connection);
 
@@ -86,8 +89,8 @@ namespace console_crud
         {
             try
             {
-                string connectionString = @"Data Source=HPARIZANI;Initial Catalog=PIM;Integrated Security=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
 
@@ -119,8 +122,8 @@ namespace console_crud
         {
             try
             {
-                string connectionString = @"Data Source=HPARIZANI;Initial Catalog=PIM;Integrated Security=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
 
