@@ -19,7 +19,7 @@ namespace console_crud
         {
             try
             {
-                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                connectionStrings = ConfigurationManager.ConnectionStrings["EXAMPLE_DB"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
@@ -55,7 +55,7 @@ namespace console_crud
             List<Product> products = new List<Product>();
             try
             {
-                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                connectionStrings = ConfigurationManager.ConnectionStrings["EXAMPLE_DB"].ConnectionString;
 
                 using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
@@ -89,7 +89,7 @@ namespace console_crud
         {
             try
             {
-                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                connectionStrings = ConfigurationManager.ConnectionStrings["EXAMPLE_DB"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
@@ -122,7 +122,7 @@ namespace console_crud
         {
             try
             {
-                connectionStrings = ConfigurationManager.ConnectionStrings["HPARIZANI"].ConnectionString;
+                connectionStrings = ConfigurationManager.ConnectionStrings["EXAMPLE_DB"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionStrings))
                 {
                     connection.Open();
